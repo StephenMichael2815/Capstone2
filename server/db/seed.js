@@ -16,6 +16,7 @@ const createTables = async () => {
     DROP TABLE IF EXISTS users CASCADE;
     DROP TABLE IF EXISTS businesses CASCADE;
     DROP TABLE IF EXISTS reviews CASCADE;
+    
     CREATE TABLE users(
       id UUID PRIMARY KEY,
       username VARCHAR(20) UNIQUE NOT NULL,

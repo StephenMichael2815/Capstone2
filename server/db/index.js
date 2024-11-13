@@ -1,4 +1,6 @@
 module.exports = {
-  ...require("./user.js"),
+  ...require("./business.js"),
   ...require("./client.js"),
+  ...require("./review.js"),
+  ...require("./user.js"),
 };
