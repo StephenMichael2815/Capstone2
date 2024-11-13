@@ -4,6 +4,8 @@ import Users from "./pages/Users";
 import Businesses from "./pages/Businesses";
 import CreateReview from "./pages/CreateReview";
 import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 
 function App() {
   const [auth, setAuth] = useState({});
