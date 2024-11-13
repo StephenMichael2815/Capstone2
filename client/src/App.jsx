@@ -33,13 +33,16 @@ function App() {
   };
 
   const authAction = async (credentials, mode) => {
-    const response = await fetch(`/api/auth/${mode}`, {
-      method: "POST",
-      body: JSON.stringify(credentials),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await fetch(
+      `http://localhost:3000/api/auth/${mode}npm run`,
+      {
+        method: "POST",
+        body: JSON.stringify(credentials),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
     const json = await response.json();
     if (response.ok) {
