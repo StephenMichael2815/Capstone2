@@ -35,16 +35,13 @@ function App() {
   };
 
   const authAction = async (credentials, mode) => {
-    const response = await fetch(
-      `http://localhost:3000/api/auth/${mode}npm run`,
-      {
-        method: "POST",
-        body: JSON.stringify(credentials),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const response = await fetch(`http://localhost:3000/api/auth/${mode}`, {
+      method: "POST",
+      body: JSON.stringify(credentials),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
 
     const json = await response.json();
     if (response.ok) {
@@ -70,7 +67,10 @@ function App() {
         {auth.id ? (
           <Link to="/createReview">Create Review</Link>
         ) : (
-          <Link to="/">Register/Login</Link>
+          <>
+            <Link to="/login">Login</Link>
+            <Link to="/register">Register</Link>
+          </>
         )}
       </nav>
       {auth.id && <button onClick={logout}>Logout {auth.username}</button>}
@@ -93,6 +93,11 @@ function App() {
         />
         <Route path="/users" element={<Users users={users} />} />
         {!!auth.id && <Route path="/createReview" element={<CreateReview />} />}
+        <Route path="/login" element={<Login authAction={authAction} />} />
+        <Route
+          path="/register"
+          element={<Register authAction={authAction} />}
+        />
       </Routes>
     </>
   );

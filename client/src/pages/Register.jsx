@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import AuthForm from "../components/AuthForm/AuthForm";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+
 const Register = ({ authAction }) => {
   const navigate = useNavigate();
   const [error, setError] = useState(null);
