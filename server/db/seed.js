@@ -1,3 +1,6 @@
+require("dotenv").config(); // Add this line at the top to load .env variables
+console.log("Database URL:", process.env.DATABASE_URL); // Add this line to check if DATABASE_URL is loaded
+
 const { client } = require("./client");
 const uuid = require("uuid");
 const {
@@ -8,8 +11,6 @@ const {
   createReview,
   fetchReviews,
 } = require("./index.js");
-
-const { createUser, fetchUsers } = require("./index.js");
 
 const createTables = async () => {
   const SQL = `
@@ -50,8 +51,11 @@ const init = async () => {
     console.log("Connecting to database...");
     await client.connect();
     console.log("Connected to the database");
+
     await createTables();
     console.log("Tables created");
+
+    // Create users
     const users = await Promise.all([
       createUser({ username: "moe", password: "m_pw" }),
       createUser({ username: "lucy", password: "l_pw" }),
@@ -63,13 +67,15 @@ const init = async () => {
       createUser({ username: "smith", password: "s_pw" }),
     ]);
 
-    const usersMap = users.reduce((acc, { user }) => {
+    // Map users for easy lookup by username
+    const usersMap = users.reduce((acc, user) => {
       acc[user.username] = user;
       return acc;
     }, {});
 
     console.log("Users created:", await fetchUsers());
 
+    // Create businesses
     const businesses = await Promise.all([
       createBusiness({
         businessname_full: "Bryan's Business World",
@@ -106,6 +112,8 @@ const init = async () => {
     ]);
 
     console.log("Businesses created:", await fetchBusinesses());
+
+    // Create reviews
     await Promise.all([
       createReview({
         title: "Title of the Review goes here 1",
@@ -143,4 +151,5 @@ const init = async () => {
     console.error("Error seeding the database:", error);
   }
 };
+
 init();

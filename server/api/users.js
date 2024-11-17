@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const { fetchUsers } = require("../db");
+const { fetchUsers } = require("../db/user");
 
 router.get("/", async (req, res, next) => {
   try {

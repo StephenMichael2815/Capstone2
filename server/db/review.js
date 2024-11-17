@@ -65,7 +65,7 @@ const getUsersReviews = async (user_id) => {
         reviews.description,
         reviews.rating,
         users.username,
-        businesses.name_full AS business_name
+        businesses.businessname_full AS business_name
       FROM reviews
       JOIN users ON reviews.user_id = users.id
       JOIN businesses ON reviews.business_id = businesses.id
@@ -74,9 +74,11 @@ const getUsersReviews = async (user_id) => {
     const { rows } = await client.query(SQL, [user_id]);
     return rows;
   } catch (err) {
+    console.error("Error fetching user reviews:", err);
     throw err;
   }
 };
+
 const getBusinessReviews = async (business_id) => {
   try {
     const SQL = `

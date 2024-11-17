@@ -17,11 +17,13 @@ const Login = ({ authAction }) => {
   };
 
   return (
-    <div>
+    <div className="login-container">
       <h1>Welcome Back!</h1>
       <AuthForm authAction={handleAuthAction} mode="login" />
       {error && <div className="error-message">{error}</div>}
-      <Link to="/register">Click here to register</Link>
+      <Link to="/register" className="register-link">
+        Click here to register
+      </Link>
     </div>
   );
 };
